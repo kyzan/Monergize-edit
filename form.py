@@ -16,6 +16,9 @@ class RegisterForm(FlaskForm):
     dob = StringField('Date Of Birth', validators=[DataRequired(), Required()])
     father = StringField('Fathers Name', validators=[DataRequired(), Length(min=3, max=20)])
     mother = StringField('Mothers Name', validators=[DataRequired(), Length(min=3, max=20)])
+
+    password = PasswordField('password')
+    h=1
     submit = SubmitField('Register')
 
 

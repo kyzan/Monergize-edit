@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+    
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+
+    <div class="page-header">
+        <h1>Market Data</h1>
+    </div>
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Log In</legend>
+                
+                <div class="form-group">
+                    {{ form.type.label(class = "form-control-label") }}
+                    {% for choice in form.type %}
+                        <tr>
+                            <td>{{ choice }}</td>
+                            <td>{{ choice.label }}</td>
+                        </tr>
+                    {% endfor%}
+                </div>
+                <ul>
+                {% for record in data %}
+                    <li>{{ record }}</li>
+                </ul>    
+                {% endfor %}
+                
+
+
+
+
+            </fieldset>
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+
+
+
+        </form>
+    </div>
+
+    
+{% endblock content %}

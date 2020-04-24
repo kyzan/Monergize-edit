@@ -1,0 +1,35 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin: 60px 0 30px;
+    padding-bottom: 6rem;
+  }
+  
+
+.container{
+  margin: 0 auto -50px;
+}
+
+.round_border{
+  border: 2px solid #343a40;
+  border-radius: 8px;
+}
+
+.round_border_small{
+  border: 1px solid #343a40;
+  border-radius: 8px;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 30px;
+  background-color: #343a40;
+  text-align: center;
+  color: wheat;
+}

@@ -17,8 +17,23 @@ class RegisterForm(FlaskForm):
     father = StringField('Fathers Name', validators=[DataRequired(), Length(min=3, max=20)])
     mother = StringField('Mothers Name', validators=[DataRequired(), Length(min=3, max=20)])
 
+    bank_id = StringField('Bank ID')
+    account_balance = StringField('First Deposit')
+    account_type = StringField('Account type')
+    set_pin = PasswordField('Set Pin')
+
+    govt_id = StringField('Aadhar Number')
+    profession = StringField('Profession')
+    contact_no = StringField('Contact')
+    branch_id = StringField('Branch ID')
+    fixed_deposit = StringField('FD Amount')
+    salary = StringField('Salary')
+    username = StringField('username')
+    tax_bracket = StringField('Tax Bracket')
+    loan_emi = StringField('Loan')
+    aco = StringField('Account Opening Date')
+
     password = PasswordField('password')
-    h=1
     submit = SubmitField('Register')
 
 

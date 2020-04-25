@@ -120,7 +120,7 @@ def reg_wsu():
 
     form = RegisterForm()
     if form.validate_on_submit():
-        user_info = [form.name.data, form.email.data, form.houseno.data, form.sector.data, form.city.data, form.state.data, form.pin.data, form.age.data, form.gender.data, form.dob.data, form.father.data, form.mother.data]
+        user_info = {'name': form.name.data, 'email': form.email.data,'houseno': form.houseno.data,'sector': form.sector.data,'city': form.city.data,'state': form.state.data,'pin': form.pin.data,'age': form.age.data,'gender': form.gender.data,'dob': form.dob.data,'father': form.father.data,'mother': form.mother.data, 'password': form.password.data}
         load_data.insert_user(user_info)
         flash('Your account has been created! You are now able to log in', 'success')
     return render_template('register.html', title="Web Service User", form=form)

@@ -84,7 +84,10 @@ def insert_user(user_detail):
     cur.execute("SELECT MAX(CUSTOMER_ID) FROM bank.customer_personal_detail")
     id_val = map(lambda x: x[0], (cur.fetchall()))
     id_val = str(list(id_val)[0]+1)
-    cur.execute("INSERT INTO bank.customer_personal_detail VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", [id_val, user_detail[0], user_detail[1], user_detail[2], user_detail[3], user_detail[4], user_detail[5], user_detail[6], user_detail[7], user_detail[8], user_detail[9], user_detail[10], user_detail[11]])
+    cur.execute("INSERT INTO bank.customer_personal_detail VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", [id_val, user_detail['name'], user_detail['email'], user_detail['houseno'], user_detail['sector'], user_detail['city'], user_detail['state'], user_detail['pin'], user_detail['age'], user_detail['gender'], user_detail['dob'], user_detail['father'], user_detail['mother']])
+    cur.execute("INSERT INTO bank.customer_login_detail VALUES(%s, %s, %s)", [id_val, user_detail['email'], user_detail['password']])
+
+    # cur.execute("INSERT INTO bank.customer_bank_details VALUES(%s, %s, %s, %s, %s, %s, %s)", [id_val, user_detail['bank_id'], 'SBI', ])
     mysql.connection.commit()
     cur.close()
 

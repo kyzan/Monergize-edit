@@ -1,7 +1,7 @@
 from flask import Flask,render_template,url_for,flash,redirect,request
 from flask_mysqldb import MySQL
 from flask_login import LoginManager,login_user,current_user,logout_user,login_required
-from form import LoginForm, DebitForm, RegisterForm, StockForm
+from form import LoginForm, DebitForm, RegisterForm, StockForm, RegComForm, RegBankForm, RegEmpForm, RegSupForm
 from load_data import *
 import load_data
 
@@ -124,6 +124,54 @@ def reg_wsu():
         load_data.insert_user(user_info)
         flash('Your account has been created! You are now able to log in', 'success')
     return render_template('register.html', title="Web Service User", form=form)
+
+@app.route('/reg_com', methods=['GET', 'POST'])
+def reg_com():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    form = RegComForm()
+    # if form.validate_on_submit():
+    #     user_info = {'name': form.name.data, 'email': form.email.data,'houseno': form.houseno.data,'sector': form.sector.data,'city': form.city.data,'state': form.state.data,'pin': form.pin.data,'age': form.age.data,'gender': form.gender.data,'dob': form.dob.data,'father': form.father.data,'mother': form.mother.data, 'password': form.password.data}
+    #     load_data.insert_user(user_info)
+    #     flash('Your account has been created! You are now able to log in', 'success')
+    return render_template('regcom.html', title="Company", form=form)
+
+@app.route('/reg_emp', methods=['GET', 'POST'])
+def reg_emp():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    form = RegEmpForm()
+    # if form.validate_on_submit():
+    #     user_info = {'name': form.name.data, 'email': form.email.data,'houseno': form.houseno.data,'sector': form.sector.data,'city': form.city.data,'state': form.state.data,'pin': form.pin.data,'age': form.age.data,'gender': form.gender.data,'dob': form.dob.data,'father': form.father.data,'mother': form.mother.data, 'password': form.password.data}
+    #     load_data.insert_user(user_info)
+    #     flash('Your account has been created! You are now able to log in', 'success')
+    return render_template('regemp.html', title="Web Service User", form=form)
+
+@app.route('/reg_bank', methods=['GET', 'POST'])
+def reg_bank():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    form = RegBankForm()
+    # if form.validate_on_submit():
+    #     user_info = {'name': form.name.data, 'email': form.email.data,'houseno': form.houseno.data,'sector': form.sector.data,'city': form.city.data,'state': form.state.data,'pin': form.pin.data,'age': form.age.data,'gender': form.gender.data,'dob': form.dob.data,'father': form.father.data,'mother': form.mother.data, 'password': form.password.data}
+    #     load_data.insert_user(user_info)
+    #     flash('Your account has been created! You are now able to log in', 'success')
+    return render_template('regbank.html', title="Web Service User", form=form)
+
+@app.route('/reg_sup', methods=['GET', 'POST'])
+def reg_sup():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    form = RegSupForm()
+    # if form.validate_on_submit():
+    #     user_info = {'name': form.name.data, 'email': form.email.data,'houseno': form.houseno.data,'sector': form.sector.data,'city': form.city.data,'state': form.state.data,'pin': form.pin.data,'age': form.age.data,'gender': form.gender.data,'dob': form.dob.data,'father': form.father.data,'mother': form.mother.data, 'password': form.password.data}
+    #     load_data.insert_user(user_info)
+    #     flash('Your account has been created! You are now able to log in', 'success')
+    return render_template('regsup.html', title="Web Service User", form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)

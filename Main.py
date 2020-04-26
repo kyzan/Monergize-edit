@@ -127,14 +127,15 @@ def reg_wsu():
 
 @app.route('/reg_com', methods=['GET', 'POST'])
 def reg_com():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('home'))
 
     form = RegComForm()
-    # if form.validate_on_submit():
-    #     user_info = {'name': form.name.data, 'email': form.email.data,'houseno': form.houseno.data,'sector': form.sector.data,'city': form.city.data,'state': form.state.data,'pin': form.pin.data,'age': form.age.data,'gender': form.gender.data,'dob': form.dob.data,'father': form.father.data,'mother': form.mother.data, 'password': form.password.data}
-    #     load_data.insert_user(user_info)
-    #     flash('Your account has been created! You are now able to log in', 'success')
+    if form.validate_on_submit():
+        user_data = {'name': form.name.data, 'type': form.type.data, 'bank_partner': form.bank_partner.data, 'bank_branch': form.bank_branch.data, 'acc_no': form.acc_no.data, 'ifsc_code': form.ifsc_code.data, 'nature_of_biz': form.nature_of_biz.data, 'contact_no': form.contact_no.data, 'tax_bracket': form.tax_bracket.data, 'doe': form.doe.data, 'type_of_acc': form.type_of_acc.data, 'loan_amount': form.loan_amount.data, 'loan_period': form.loan_period.data, 'fd': form.fd.data, 'int_rate': form.int_rate.data, 'branches_in_india': form.branches_in_india.data, 'importers_id': form.importers_id.data, 'raw_material': form.raw_material.data, 'finished_product': form.finished_product.data, 'custom_duty': form.custom_duty.data, 'relaxation_limit': form.relaxation_limit.data, 'gst': form.gst.data, 'pe_ratio': form.pe_ratio.data, 'quick_ratio': form.quick_ratio.data, 'acc_payable': form.acc_payable.data, 'acc_receivable': form.acc_receivable.data, 'eps': form.eps.data, 'market_value': form.market_value.data, 'book_value': form.book_value.data, 'total_assets': form.total_assets.data, 'total_liabilities': form.total_liabilities.data, 'inventories': form.inventories.data, 'external_fundings': form.external_fundings.data, 'retained_earnings': form.retained_earnings.data, 'product_id ': form.product_id .data, 'product_name': form.product_name.data, 'email': form.email.data, 'password': form.password.data}
+        print(user_data)
+        # load_data.insert_company(user_info)
+        flash('Your account has been created! You are now able to log in', 'success')
     return render_template('regcom.html', title="Company", form=form)
 
 @app.route('/reg_emp', methods=['GET', 'POST'])

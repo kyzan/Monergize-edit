@@ -14,9 +14,10 @@
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
+                <legend class="border-bottom mb-4">Market Data</legend>
                 
                 <div class="form-group">
+                    <p>(ID, NAME, PE Ratio, Quic Ratio, Acc Payable, Acc Receivable, EPS, Market Value, Book Value, Total Assets, Total Liabilities, Inventories, External Fundings, Retained Earnings)</p>
                     {{ form.type.label(class = "form-control-label") }}
                     {% for choice in form.type %}
                         <tr>

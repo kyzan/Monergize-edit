@@ -91,6 +91,16 @@ def insert_user(user_detail):
     mysql.connection.commit()
     cur.close()
 
+def insert_company(user_detail):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT MAX(Comp_ID) FROM bank.company_market_detail")
+    id_val = map(lambda x: x[0], (cur.fetchall()))
+    id_val = 'COMP'+str(int(list(id_val)[0][4:])+1)
+    cur.execute("INSERT INTO bank.company_market_detail VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", [id_val, user_detail['name'], user_detail['pe_ratio'], user_detail['quick_ratio'], user_detail['acc_payable'], user_detail['acc_receivable'], user_detail['eps'], user_detail['market_value'], user_detail['book_value'], user_detail['total_assets'], user_detail['total_liabilities'], user_detail['inventories'], user_detail['external_fundings'], user_detail['retained_earnings']])
+    # cur.execute("INSERT INTO bank.customer_login_detail VALUES(%s, %s, %s)", [id_val, user_detail['email'], user_detail['password']])    
+    mysql.connection.commit()
+    cur.close()
+
 def load_market_data(para):
     if para =="pe_ratio":
         cur = mysql.connection.cursor()

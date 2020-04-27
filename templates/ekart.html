@@ -1,12 +1,7 @@
 {% extends "layout.html" %}
 
-    
-    {% if message %}
-    <p>{{ message }}</p>
-    {% endif %}
-
     <div class="page-header">
-        <h1>Market Data</h1>
+        <h1>Your Door-Step Delivery Store</h1>
     </div>
 
 {% block content %}
@@ -14,12 +9,12 @@
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Market Data</legend>
+                <legend class="border-bottom mb-4">Products</legend>
                 
                 <div class="form-group">
                     
-                    {{ form.type.label(class = "form-control-label") }}
-                    {% for choice in form.type %}
+                    {{ form.radio.label(class = "form-control-label") }}
+                    {% for choice in form.radio %}
                         <tr>
                             <td>{{ choice }}</td>
                             <td>{{ choice.label }}</td>
@@ -28,20 +23,11 @@
                 </div>
                 <table style="width: 100%">
                     <tr>
-                        <th>ID</th>
-                        <th>NAME</th>
-                        <th>PE Ratio</th>
-                        <th>Quick Ratio</th>
-                        <th>Acc Payable</th>
-                        <th>Acc Receivable</th>
-                        <th>EPS</th>
-                        <th>Market Value</th>
-                        <th>Book Value</th>
-                        <th>Total Assets</th>
-                        <th>Total Liabilities</th>
-                        <th>Inventories</th>
-                        <th>External Fundings</th>
-                        <th>Retained Earnings</th>
+                        <th>SELLER ID</th>
+                        <th>PRODUCT ID</th>
+                        <th>PRODUCT NAME</th>
+                        <th>CATEGORY</th>
+                        <th>PRICE</th>
                     </tr> 
                     {% for record in data %}
                     <tr>

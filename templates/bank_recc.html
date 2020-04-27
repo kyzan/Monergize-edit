@@ -18,8 +18,8 @@
                 
                 <div class="form-group">
                     
-                    {{ form.type.label(class = "form-control-label") }}
-                    {% for choice in form.type %}
+                    {{ form.radio.label(class = "form-control-label") }}
+                    {% for choice in form.radio %}
                         <tr>
                             <td>{{ choice }}</td>
                             <td>{{ choice.label }}</td>
@@ -28,20 +28,16 @@
                 </div>
                 <table style="width: 100%">
                     <tr>
-                        <th>ID</th>
-                        <th>NAME</th>
-                        <th>PE Ratio</th>
-                        <th>Quick Ratio</th>
-                        <th>Acc Payable</th>
-                        <th>Acc Receivable</th>
-                        <th>EPS</th>
-                        <th>Market Value</th>
-                        <th>Book Value</th>
-                        <th>Total Assets</th>
-                        <th>Total Liabilities</th>
-                        <th>Inventories</th>
-                        <th>External Fundings</th>
-                        <th>Retained Earnings</th>
+                        <th>BANK ID</th>
+                        <th>BANK NAME</th>
+                        <th>BRANCH ID</th>
+                        <th>BRANCH NAME</th>
+                        <th>CONTACT</th>
+                        <th>CUSTOMERS</th>
+                        <th>LOAN INTEREST</th>
+                        <th>SAVINGS INTEREST</th>
+                        <th>CURRENT INTEREST</th>
+                        <th>MINIMUM ACCOUNT BALANCCE</th>
                     </tr> 
                     {% for record in data %}
                     <tr>

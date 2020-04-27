@@ -122,3 +122,167 @@ def load_market_data(para):
         cur.close()
 
     return data
+
+def load_employee_data(comp_id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM bank.customer_employment_details WHERE COMPANY_ID=(%s)", [comp_id])
+    data = cur.fetchall()
+    mysql.connection.commit()
+    cur.close()
+
+    return data
+
+def load_su_data():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT su_id, su_name,account_id,date_created, sales_type, registered_email, linked_accounts, locations, size  FROM bank.startups")
+    data = cur.fetchall()
+    mysql.connection.commit()
+    cur.close()
+
+    return data
+
+def add_amount(id,amount,radio):
+    if radio=="Employee":
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE bank.customer_bank_details SET account_balance = account_balance+%s WHERE customer_id = %s",[int(amount),id])
+        mysql.connection.commit()
+        cur.close()
+    elif radio=="Start Ups":
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE bank.startups SET bank_balance = bank_balance+%s WHERE su_id = %s",[int(amount),id])
+        mysql.connection.commit()
+        cur.close()
+    return True
+
+def load_products(value):
+    if value=='Food':
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT seller_id, product_id,product_name,category,price FROM bank.products WHERE category=%s",['Food'])
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+    elif value == 'Fashion':
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT seller_id, product_id,product_name,category,price FROM bank.products WHERE category=%s",['Fashion'])
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+    elif value == 'Fitness':
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT seller_id, product_id,product_name,category,price FROM bank.products WHERE category=%s",['Fitness'])
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+    elif value == 'Gadgets':
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT seller_id, product_id,product_name,category,price FROM bank.products WHERE category=%s",['Gadgets'])
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+    elif value == 'Lowest Prices':
+        cur = mysql.connection.cursor()
+        cur.execute("select f.seller_id, f.product_id,f.product_name,f.category,f.price from ( select category, min(price) as minprice from products group by category) as x inner join products as f on f.category = x.category and f.price = x.minprice")
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+    elif value == 'Best Sellers':
+        cur = mysql.connection.cursor()
+        cur.execute("select f.seller_id, f.product_id,f.product_name,f.category,f.price from ( select category, max(sold) as maxsold from products group by category) as x inner join products as f on f.category = x.category and f.sold = x.maxsold")
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+    else:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT seller_id, product_id,product_name,category,price FROM bank.products order by price")
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+    return data
+
+def custom_duty(comp_id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT (raw_material + finished_product)*(custom_duty + gst - relaxation_limit)/100 FROM bank.company_imports WHERE COMP_ID=(%s)", [comp_id])
+    data = cur.fetchall()
+    mysql.connection.commit()
+    cur.close()
+
+    return data
+
+def best_company():
+    cur = mysql.connection.cursor()
+    cur.execute("(select * from bank.company_market_detail where pe_ratio = (select max(pe_ratio) from company_market_detail)) union (select * from bank.company_market_detail where eps = (select max(eps) from company_market_detail))")
+    data = cur.fetchall()
+    mysql.connection.commit()
+    cur.close()
+
+    return data
+
+def better_company(comp_id):
+    cur = mysql.connection.cursor()
+    cur.execute("select * from bank.company_market_detail where pe_ratio > (select pe_ratio from bank.company_market_detail where comp_id=%s) or eps > (select eps from bank.company_market_detail where comp_id=%s)",[comp_id,comp_id])
+    data = cur.fetchall()
+    mysql.connection.commit()
+    cur.close()
+
+    return data        
+
+def rev_by_category():
+    cur = mysql.connection.cursor()
+    cur.execute("select category, sum(price*sold) as revenue from bank.products group by category")
+    data = cur.fetchall()
+    mysql.connection.commit()
+    cur.close()
+
+    return data      
+
+def own_market_data(comp_id):
+    cur = mysql.connection.cursor()
+    cur.execute("select * from bank.company_market_detail where comp_id=%s",[comp_id])
+    data = cur.fetchall()
+    mysql.connection.commit()
+    cur.close()
+
+    return data     
+
+def bank_recc(val):
+    if val=="Most Trusted":
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT bank_id, bank_name, branch_id, branch_name, branch_contact_number, number_of_customer, ROI_for_loans, ROI_for_savings, ROI_for_current, min_acc_balance from (select bank_id, bank_name, branch_id, branch_name, branch_contact_number, number_of_customer, ROI_for_loans, ROI_for_savings, ROI_for_current, min_acc_balance from bank.bank where annual_share_govt>20000) as t1 where number_of_customer > 200")
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+
+        return data
+
+    elif val=="Loan Friendly":
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT bank_id, bank_name, branch_id, branch_name, branch_contact_number, number_of_customer, ROI_for_loans, ROI_for_savings, ROI_for_current, min_acc_balance from bank.bank where ROI_for_loans <= (SELECT AVG(roi_for_loans) from bank.bank)")
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+
+        return data
+    elif val=="Best for Savings":
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT bank_id, bank_name, branch_id, branch_name, branch_contact_number, number_of_customer, ROI_for_loans, ROI_for_savings, ROI_for_current, min_acc_balance from bank.bank where ROI_for_savings >= (SELECT AVG(roi_for_savings) from bank.bank) and no_of_fds >=(select avg(no_of_fds) from bank.bank)")
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+
+        return data
+    elif val=="Least Minimum Account Balance":
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT bank_id, bank_name, branch_id, branch_name, branch_contact_number, number_of_customer, ROI_for_loans, ROI_for_savings, ROI_for_current, min_acc_balance from bank.bank where min_acc_balance = (select min(min_acc_balance) from bank.bank)")
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+
+        return data
+    else:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT bank_id, bank_name, branch_id, branch_name, branch_contact_number, number_of_customer, ROI_for_loans, ROI_for_savings, ROI_for_current, min_acc_balance from bank.bank")
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+
+        return data

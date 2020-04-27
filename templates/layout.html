@@ -16,6 +16,21 @@
         <title>Monergize</title>
     {% endif %}
 
+    <style> 
+      table, th, td { 
+          border: 1px solid black; 
+          border-collapse: collapse; 
+      } 
+        
+      th, td { 
+          padding: 20px; 
+      } 
+        
+      th { 
+          text-align: left; 
+      } 
+    </style> 
+
 </head>
 <body style="background-color: #00000026">
 
@@ -39,6 +54,12 @@
           <li class="nav-item">
             <a class="nav-link active" href="{{ url_for('stock') }}">Stocks <span class="sr-only">(current)</span></a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('ekart') }}">E-Kart<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('banks') }}">Banks<span class="sr-only">(current)</span></a>
+          </li>          
 
         </ul>
 
@@ -86,6 +107,10 @@
               <a class="list-group-item list-group-item-light" href="/">Flask Blog</a>
               <a class="list-group-item list-group-item-light" href="{{ url_for('home') }}">Home</a>
               <a class="list-group-item list-group-item-light" href="{{ url_for('about') }}">About</a>
+              <a class="list-group-item list-group-item-light" href="{{ url_for('mnc_pay') }}">Expenditure</a>
+              <a class="list-group-item list-group-item-light" href="{{ url_for('payment') }}">Payment Portal</a>
+              <a class="list-group-item list-group-item-light" href="{{ url_for('perform') }}">Performance</a>
+
               {% endif %}             
               
             </p>

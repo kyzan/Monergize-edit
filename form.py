@@ -156,3 +156,27 @@ class RegBankForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=3, max=20)])
     submit = SubmitField('Register')
+
+class MNCPayForm(FlaskForm):
+    id = StringField('Company ID')
+    submit = SubmitField('Submit')
+
+class PaymentForm(FlaskForm):
+    id = StringField('Recipients ID')
+    amount = StringField('Amount')
+    radio = RadioField('Choose', choices=[('Employee','Employee'),('Start Ups','Start Ups')])
+    cid = StringField('Your ID')
+    pin = PasswordField('PIN')
+    submit = SubmitField('CONFIRM')
+
+class EKartForm(FlaskForm):
+    radio = RadioField('Filters', choices=[('Food','Food'),('Fashion','Fashion'),('Fitness','Fitness'),('Gadgets','Gadgets'),('Best Sellers','Best Sellers'),('Lowest Prices','Lowest Prices')])
+    submit = SubmitField('Find the right item!')
+
+class PerformanceForm(FlaskForm):
+    id = StringField('Company ID')
+    submit = SubmitField('Submit')
+
+class BankPrefForm(FlaskForm):
+    radio = RadioField('Parameters', choices=[('Most Trusted','Most Trusted'),('Loan Friendly','Loan Friendly'),('Best for Savings','Best for Savings'),('Least Minimum Account Balance','Least Minimum Account Balance')])
+    submit = SubmitField('Submit')

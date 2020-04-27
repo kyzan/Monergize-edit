@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section round_border bg-light p-2 m-2">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Get Details</legend>
+                
+                <div class="form-group">
+                    {{ form.id.label(class="form-control-label") }}
+                    {% if form.id.errors %}
+                        {{ form.id(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.id(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+
+            </fieldset>
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+
+
+
+        </form>
+    </div>
+    <H3>EMPLOYEE DATA</H3>
+    <table style="width: 100%">
+        <tr>
+            <th>CUST_ID</th>
+            <th>COMPANY_ID</th>
+            <th>SECTOR</th>
+            <th>PRODUCT</th>
+            <th>NAME</th>
+            <th>WORKING FROM</th>
+            <th>WORKING TILL</th>
+        </tr> 
+        {% for record in data %}
+        <tr>
+            {% for val in record %}
+            <td>
+                {{ val }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <H3>STARTUP DATA</H3>
+    <table style="width: 100%">
+        <tr>
+            <th>CUST_ID</th>
+            <th>COMPANY_ID</th>
+            <th>SECTOR</th>
+            <th>PRODUCT</th>
+            <th>NAME</th>
+            <th>WORKING FROM</th>
+            <th>WORKING TILL</th>
+            <th>WORKING TILL</th>
+        </tr> 
+        {% for record in data1 %}
+        <tr>
+            {% for val in record %}
+            <td>
+                {{ val }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <H3>CUSTOM DUTY</H3>
+    <table style="width: 100%">
+        <tr>
+            <th>VALUE</th>
+        </tr> 
+        {% for record in data2 %}
+        <tr>
+            {% for val in record %}
+            <td>
+                {{ val }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

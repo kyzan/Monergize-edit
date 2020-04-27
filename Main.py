@@ -1,7 +1,7 @@
 from flask import Flask,render_template,url_for,flash,redirect,request
 from flask_mysqldb import MySQL
 from flask_login import LoginManager,login_user,current_user,logout_user,login_required
-from form import LoginForm, DebitForm, RegisterForm, StockForm, RegComForm, RegBankForm, RegEmpForm, RegSupForm
+from form import LoginForm, DebitForm, RegisterForm, StockForm, RegComForm, RegBankForm, RegEmpForm, RegSupForm, MNCPayForm, PaymentForm, EKartForm, PerformanceForm, BankPrefForm
 from load_data import *
 import load_data
 
@@ -174,5 +174,61 @@ def reg_sup():
     #     flash('Your account has been created! You are now able to log in', 'success')
     return render_template('regsup.html', title="Web Service User", form=form)
 
+@app.route("/mnc_pay", methods=['GET', 'POST'])
+def mnc_pay():
+    data = (('NA','NA','NA','NA','NA','NA','NA'),)
+    data1 = (('NA','NA','NA','NA','NA','NA','NA','NA'),)
+    data2 = (('NA',),)
+    form = MNCPayForm()
+    if form.validate_on_submit():
+        data =load_data.load_employee_data(form.id.data)
+        data1 = load_data.load_su_data()
+        data2 = load_data.custom_duty(form.id.data)
+    return render_template('mnc_pay.html', form=form, data=data, data1=data1, data2 = data2)
+
+@app.route("/payment", methods=['GET', 'POST'])
+def payment():
+    form = PaymentForm()
+    if form.validate_on_submit():
+        id = form.id.data
+        amount = form.amount.data
+        radio = form.radio.data
+        load_data.add_amount(id,amount,radio)
+        flash("amount: "+amount+" transferred to "+radio+" "+id+" successfully "+' Transaction ID: 123456789')
+    return render_template('payment.html', form=form)
+
+@app.route("/ekart", methods=['GET', 'POST'])
+def ekart():
+    data = load_data.load_products(0)
+    form = EKartForm()
+    if form.validate_on_submit():
+        data =load_data.load_products(form.radio.data)
+
+    return render_template('ekart.html', form=form, data=data)
+
+@app.route("/perform", methods=['GET', 'POST'])
+def perform():
+    data0 = (('NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA'),)
+    data = (('NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA'),)
+    data1 = (('NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA'),)
+    data2 = (('NA','NA'),)
+    form = PerformanceForm()
+    if form.validate_on_submit():
+        data0 = load_data.own_market_data(form.id.data)
+        data =load_data.best_company()
+        data1 = load_data.better_company(form.id.data)
+        data2 = load_data.rev_by_category()
+    return render_template('perform.html', form=form, data=data, data1=data1, data2 = data2, data0=data0)
+
+@app.route("/banks", methods=['GET', 'POST'])
+def banks():
+    data = load_data.bank_recc(0)
+
+    form = BankPrefForm()
+    if form.validate_on_submit():
+        data = bank_recc(form.radio.data)
+    return render_template('bank_recc.html', form=form, data=data)
+
 if __name__ == '__main__':
     app.run(debug=True)
+

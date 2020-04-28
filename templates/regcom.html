@@ -2,6 +2,7 @@
 {% block content %}
     <div class="content-section round_border bg-light p-2 m-2">
         <form method="POST" action="">
+            {{ form.csrf_token }}
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Register Company</legend>
@@ -98,16 +99,16 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.finished_product.label(class="form-control-label") }}
-                    {% if form.finished_product.errors %}
-                        {{ form.finished_product(class="form-control form-control-lg is-invalid") }}
+                    {{ form.contact_no.label(class="form-control-label") }}
+                    {% if form.contact_no.errors %}
+                        {{ form.contact_no(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.finished_product.errors %}
+                            {% for error in form.contact_no.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.finished_product(class="form-control form-control-lg") }}
+                        {{ form.contact_no(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
                 <div class="form-group">
@@ -472,6 +473,45 @@
                         </div>
                     {% else %}
                         {{ form.product_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.category.label(class="form-control-label") }}
+                    {% if form.category.errors %}
+                        {{ form.category(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.category.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.category(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.price.label(class="form-control-label") }}
+                    {% if form.price.errors %}
+                        {{ form.price(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.price.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.price(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.sold.label(class="form-control-label") }}
+                    {% if form.sold.errors %}
+                        {{ form.sold(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.sold.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.sold(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 

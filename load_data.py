@@ -483,6 +483,12 @@ def load_products(value):
         data = cur.fetchall()
         mysql.connection.commit()
         cur.close()
+    elif value == 'graph':
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT distinct(seller_id), product_id,product_name,category,(price*sold) as revenue FROM products order by seller_id")
+        data = cur.fetchall()
+        mysql.connection.commit()
+        cur.close() 
     else:
         cur = mysql.connection.cursor()
         cur.execute("SELECT seller_id, product_id,product_name,category,price FROM bank.products order by price")

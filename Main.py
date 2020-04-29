@@ -239,12 +239,33 @@ def banks_performance():
     data =  bank_recc(0)
     form = BankPrefForm()
     if form.validate_on_submit():
+        if(form.radio.data=='graph'):
+            return redirect(url_for('banks_bar'))
         data = bank_recc(form.radio.data)
     statements = []
     for entry in data:
         statements.append(list(entry.values()))
     data=statements
     return render_template('Bank_performance.html', form=form, data=data)
+
+
+@app.route('/banks_bar', methods=['GET', 'POST'])
+def banks_bar():
+    data=bank_recc('graph')
+    print(data)
+    bar_labels=[]
+    bar_values=[]
+    for j in data:
+        bar_labels.append(j['bank_name'])
+        bar_values.append(j['ROI_for_loans'])
+    chart = pygal.Bar(width=1200, height=700,spacing=100,explicit_size=True)
+    chart.title='ROI for Loan Comparison'
+    
+    for i in range(len(bar_labels)):
+        chart.add(bar_labels[i],(bar_values[i]))
+    chart.render_in_browser()
+    #chart_data = chart.render_data_uri()
+    return redirect(url_for('banks_performance'))
 
 @app.route("/corporate/stock", methods=['GET', 'POST'])
 def stock_comparision():
@@ -310,12 +331,41 @@ def company_performance():
     data1 = (('NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA'),)
     data2 = (('NA','NA'),)
     form = PerformanceForm()
+    global current_company
+    current_company=form.id.data
     if form.validate_on_submit():
+        #if(form.radio.data=='graph'):
+        return redirect(url_for('company_bar'))
+    else:
         data0 =  own_market_data(form.id.data)
         data = best_company()
         data1 =  better_company(form.id.data)
-        data2 =  rev_by_category()
-    return render_template('corporate_performance.html', form=form, data=data, data1=data1, data2 = data2, data0=data0)
+        data2 =  rev_by_category()    
+        return render_template('corporate_performance.html', form=form, data=data, data1=data1, data2 = data2, data0=data0)
+
+@app.route('/company_bar', methods=['GET', 'POST'])
+def company_bar():
+    data=load_market_data('company_name')
+    global current_company
+    ownData=own_market_data(current_company)
+    print(ownData)
+    bar_labels=[]
+    bar_values=[]
+    for j in data:
+        print(j)
+        if(j['comp_id']!=ownData[0][2]):
+            bar_labels.append(j['company_name'])
+            bar_values.append(j['pe_ratio'])
+    bar_labels.append('YOUR COMPANY')
+    bar_values.append(ownData[0][2])
+    chart = pygal.Bar(width=1200, height=700,spacing=100,explicit_size=True)
+    chart.title='Price-to-Earnings Ratio Comparison'
+    for i in range(len(bar_labels)):
+        chart.add(bar_labels[i],(bar_values[i]))
+    #chart.add('Your Company',{'value':ownData[0][2],'style': 'fill: red; stroke: black; stroke-width: 8'})
+    chart.render_in_browser()
+    #chart_data = chart.render_data_uri()
+    return redirect(url_for('company_performance'))
 
 @app.route("/coporate/mnc/pay", methods=['GET', 'POST'])
 def mnc_pay():
@@ -345,8 +395,27 @@ def ekart():
     data = load_products(0)
     form = EKartForm()
     if form.validate_on_submit():
+        if(form.radio.data=='graph'):
+            return redirect(url_for('ekart_bar'))
         data =load_products(form.radio.data)
     return render_template('corporate_ekart.html', form=form, data=data)
+
+@app.route('/ekart_bar', methods=['GET', 'POST'])
+def ekart_bar():
+    data=load_products('graph')
+    print(data)
+    bar_labels=[]
+    bar_values=[]
+    for j in data:
+        bar_labels.append(j[0])
+        bar_values.append(j[4])
+    chart = pygal.Bar(width=1200, height=700,spacing=100,explicit_size=True)
+    chart.title='Comparison Based on Revenue'
+    for i in range(len(bar_labels)):
+        chart.add(bar_labels[i],(bar_values[i]))
+    chart.render_in_browser()
+    #chart_data = chart.render_data_uri()
+    return redirect(url_for('ekart'))
 
 @app.route('/reg_wsu', methods=['GET', 'POST'])
 def reg_wsu():
@@ -410,9 +479,17 @@ def reg_sup():
     form = RegSupForm()
     if form.validate_on_submit():
         user_info = {'su_name': form.su_name.data, 'account_id': form.account_id.data, 'date_val': form.date_val.data, 'date_created': form.date_created.data, 'bank_balance': form.bank_balance.data, 'sales_type': form.sales_type.data, 'email': form.email.data, 'registered_photo': form.registered_photo.data, 'linked_acc': form.linked_acc.data, 'state': form.state.data, 'size': form.size.data, 'tax_owed': form.tax_owed.data, 'source_id': form.source_id.data, 'value': form.value.data, 'interest': form.interest.data, 'product_id': form.product_id.data, 'product_name': form.product_name.data, 'category': form.category.data, 'price': form.price.data, 'sold': form.sold.data, 'password': form.password.data}
-        load_data.insert_user(user_info)
+        # load_data.insert_user(user_info)
         flash('Your account has been created! You are now able to log in', 'success')
     return render_template('regsup.html', title="Web Service User", form=form)
+
+@app.route('/currency', methods=['GET', 'POST'])
+def currency():
+    return render_template('currency.html', title = 'Forex')
+
+@app.route('/emi', methods=['GET', 'POST'])
+def emi():
+    return render_template('emi.html', title = 'EMI Calculator')
 
 if __name__ == '__main__':
     app.run(debug=True)

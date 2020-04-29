@@ -66,7 +66,7 @@ class submitbutton(FlaskForm):
     submit = SubmitField('Submit')
 
 class BankPrefForm(FlaskForm):
-    radio = RadioField('Parameters', choices=[('Most Trusted','Most Trusted'),('Loan Friendly','Loan Friendly'),('Best for Savings','Best for Savings'),('Least Minimum Account Balance','Least Minimum Account Balance')])
+    radio = RadioField('Parameters', choices=[('Most Trusted','Most Trusted'),('Loan Friendly','Loan Friendly'),('Best for Savings','Best for Savings'),('Least Minimum Account Balance','Least Minimum Account Balance'),('graph','Show Graphical Analysis')])
     submit = SubmitField('Search')
 
 class StockForm(FlaskForm):
@@ -75,6 +75,7 @@ class StockForm(FlaskForm):
 
 class PerformanceForm(FlaskForm):
     id = StringField('Company ID')
+    radio = RadioField('',choices=[('graph','Show Graphical Analysis')])
     submit = SubmitField('Submit')
 
 class MNCPayForm(FlaskForm):
@@ -90,7 +91,7 @@ class PaymentForm(FlaskForm):
     submit = SubmitField('CONFIRM')
 
 class EKartForm(FlaskForm):
-    radio = RadioField('Filters', choices=[('Health','Health'),('Fashion','Fashion'),('Books','Books'),('Electronics','Electronics'),('Best Sellers','Best Sellers'),('Lowest Prices','Lowest Prices')])
+    radio = RadioField('Filters', choices=[('Health','Health'),('Fashion','Fashion'),('Books','Books'),('Electronics','Electronics'),('Best Sellers','Best Sellers'),('Lowest Prices','Lowest Prices'),('graph','Show Graphical Analysis')])
     submit = SubmitField('Find the right item!')
 
 class RegisterForm(FlaskForm):
@@ -239,3 +240,6 @@ class RegBankForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=3, max=20)])
     submit = SubmitField('Register')
+
+class InvestForm(FlaskForm):
+    email = StringField('Email')

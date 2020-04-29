@@ -1,0 +1,107 @@
+{% extends "layout_company.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+    <div class="col-md-6 round_border bg-light p-2 m-2">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Get Details</legend>
+                
+                <div class="form-group">
+                    {{ form.id.label(class="form-control-label") }}
+                    {% if form.id.errors %}
+                        {{ form.id(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.id(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+
+            </fieldset>
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+
+
+
+        </form>
+    </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row round bg-light mx-4 my-2">
+    <H3>EMPLOYEE DATA</H3>
+    <table style="width: 100%">
+        <tr>
+            <th>CUST_UD</th>
+            <th>COMPANY_ID</th>
+            <th>SECTOR</th>
+            <th>PRODUCT</th>
+            <th>NAME</th>
+            <th>WORKING FROM</th>
+            <th>WORKING TILL</th>
+        </tr> 
+        {% for record in data %}
+        <tr>
+            {% for val in record %}
+            <td>
+                {{ val }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+
+    <div class="row round bg-light mx-4 my-2">
+    <H3>STARTUP DATA</H3>
+    <table style="width: 100%">
+        <tr>
+            <th>SU_ID</th>
+            <th>NAME</th>
+            <th>ACCOUNT</th>
+            <th>DATE OF CREATION</th>
+            <th>SECTOR</th>
+            <th>EMAIL</th>
+            <th>FUNDS</th>
+            <th>LOCATION</th>
+        </tr> 
+        {% for record in data1 %}
+        <tr>
+            {% for val in record %}
+            <td>
+                {{ val }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+
+    <div class="row round bg-light mx-4 my-2">
+    <H3>CUSTOM DUTY</H3>
+    <table style="width: 100%">
+        <tr>
+            <th>VALUE</th>
+        </tr> 
+        {% for record in data2 %}
+        <tr>
+            {% for val in record %}
+            <td>
+                {{ val }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+</div>
+{% endblock content %}

@@ -242,4 +242,11 @@ class RegBankForm(FlaskForm):
     submit = SubmitField('Register')
 
 class InvestForm(FlaskForm):
-    email = StringField('Email')
+    email = StringField('Email',validators=[DataRequired(),Email()])
+    profession = StringField('Occupation', validators=[])
+    profit = RadioField('How much return do you want?',choices=[('H','High'),('M','Medium'),('L','Low')])
+    risk = RadioField('How risk can you take?',choices=[('H','High'),('M','Medium'),('L','Low')])
+    time = RadioField('How much time can you invest?',choices=[('H','>5 Years'),('M','3-5 Years'),('L','0-3 Years')])
+    capital = RadioField('How much capital can you invest?',choices=[('H','>10 Lakhs'),('M','1-10 Lakhs'),('L','<1 Lakhs')])
+    submit = SubmitField('Find!')
+

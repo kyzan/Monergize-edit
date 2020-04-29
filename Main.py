@@ -491,5 +491,71 @@ def currency():
 def emi():
     return render_template('emi.html', title = 'EMI Calculator')
 
+@app.route('/invest', methods=['GET', 'POST'])
+def invest():
+    form = InvestForm()
+    if form.validate_on_submit():
+        print(form.profit.data)
+        if form.profit.data == 'H' and form.risk.data == 'L' and form.time.data == 'H':
+            return redirect(url_for('nps'))                
+        elif form.profit.data == 'M' and form.risk.data == 'L':
+            return redirect(url_for('gold'))
+        elif form.profit.data == 'H' and form.risk.data == 'H':
+            return redirect(url_for('nifty'))
+        elif form.profit.data == 'M' and form.risk.data == 'H':
+            return redirect(url_for('sensex'))
+        elif form.profit.data == 'H' and form.risk.data == 'M':
+            return redirect(url_for('mutual'))
+        elif form.profit.data == 'H' and form.risk.data == 'L' and form.time.data == 'L' and form.capital.data =='H':
+            return redirect(url_for('real'))
+        elif form.profit.data == 'M' and form.risk.data == 'L' and form.time.data == 'H':
+            return redirect(url_for('ppf'))
+        elif form.profit.data == 'L' and form.risk.data == 'L' and form.time.data == 'H':
+            return redirect(url_for('fd'))
+        elif form.profit.data == 'M' and form.risk.data == 'M':
+            return redirect(url_for('bonds'))
+        else:
+            flash("Your requirements need to be modified for the accurate results",'success')
+    return render_template('invest.html', title = 'Investment Plan',form=form)
+
+@app.route('/nps', methods=['GET', 'POST'])
+def nps():
+    return render_template('nps.html', title = 'NPS')
+
+@app.route('/fd', methods=['GET', 'POST'])
+def fd():
+    return render_template('fd.html', title = 'NPS')
+
+@app.route('/gold', methods=['GET', 'POST'])
+def gold():
+    return render_template('gold.html', title = 'NPS')
+
+@app.route('/sensex', methods=['GET', 'POST'])
+def sensex():
+    return render_template('sensex.html', title = 'NPS')
+
+@app.route('/nifty', methods=['GET', 'POST'])
+def nifty():
+    return render_template('nifty.html', title = 'NPS')
+
+@app.route('/real', methods=['GET', 'POST'])
+def real():
+    return render_template('real.html', title = 'NPS')
+
+@app.route('/ppf', methods=['GET', 'POST'])
+def ppf():
+    return render_template('ppf.html', title = 'NPS')
+
+@app.route('/mutual', methods=['GET', 'POST'])
+def mutual():
+    return render_template('mutual.html', title = 'NPS')
+
+@app.route('/bonds', methods=['GET', 'POST'])
+def bonds():
+    return render_template('bonds.html', title = 'NPS')
+
+ 
+
+
 if __name__ == '__main__':
     app.run(debug=True)

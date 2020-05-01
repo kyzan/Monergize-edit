@@ -1,15 +1,13 @@
-CREATE DATABASE  IF NOT EXISTS `bank` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `bank`;
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: bank
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	5.7.29-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,19 +21,19 @@ USE `bank`;
 
 DROP TABLE IF EXISTS `mnc_and_govtsector`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mnc_and_govtsector` (
-  `comp_id` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `company_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `company type` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `bank` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `bank_branch` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `account_no` int NOT NULL,
-  `ifsc_code` varchar(13) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `nature_of_business` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `email_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `contact_no` int NOT NULL,
-  `tax_bracket` varchar(5) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `comp_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `company_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `company type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `bank` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `bank_branch` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `account_no` int(11) NOT NULL,
+  `ifsc_code` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
+  `nature_of_business` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `email_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `contact_no` int(11) NOT NULL,
+  `tax_bracket` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `date_of_establishment` date DEFAULT NULL,
   PRIMARY KEY (`comp_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -60,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-28 12:13:55
+-- Dump completed on 2020-05-01 16:26:58

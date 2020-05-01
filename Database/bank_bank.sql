@@ -1,15 +1,13 @@
-CREATE DATABASE  IF NOT EXISTS `bank` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `bank`;
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: bank
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	5.7.29-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,24 +21,24 @@ USE `bank`;
 
 DROP TABLE IF EXISTS `bank`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bank` (
-  `Universal_id` char(5) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `bank_id` char(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `bank_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `branch_id` int NOT NULL,
-  `branch_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `branch_contact_number` int DEFAULT NULL,
-  `number_of_customer` int DEFAULT NULL,
+  `Universal_id` char(5) COLLATE utf8_unicode_ci NOT NULL,
+  `bank_id` char(10) COLLATE utf8_unicode_ci NOT NULL,
+  `bank_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `branch_id` int(11) NOT NULL,
+  `branch_name` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `branch_contact_number` int(11) DEFAULT NULL,
+  `number_of_customer` int(11) DEFAULT NULL,
   `total_assets` float DEFAULT NULL,
   `ROI_for_loans` float DEFAULT NULL,
   `ROI_for_savings` float DEFAULT NULL,
   `ROI_for_current` float DEFAULT NULL,
-  `no_of_fds` int DEFAULT NULL,
-  `min_acc_balance` int DEFAULT NULL,
+  `no_of_fds` int(11) DEFAULT NULL,
+  `min_acc_balance` int(11) DEFAULT NULL,
   `annual_share_govt` float DEFAULT NULL,
-  `loan_taken` int DEFAULT NULL,
-  `money_lent` int NOT NULL,
+  `loan_taken` int(11) DEFAULT NULL,
+  `money_lent` int(11) NOT NULL,
   PRIMARY KEY (`bank_id`,`Universal_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -64,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-28 12:13:55
+-- Dump completed on 2020-05-01 16:26:58

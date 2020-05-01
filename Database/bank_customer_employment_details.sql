@@ -1,15 +1,13 @@
-CREATE DATABASE  IF NOT EXISTS `bank` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `bank`;
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: bank
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	5.7.29-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,13 +21,13 @@ USE `bank`;
 
 DROP TABLE IF EXISTS `customer_employment_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customer_employment_details` (
-  `Customer_ID` int NOT NULL,
-  `Company_ID` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `Sector` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `Product_Type` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `Company_Name` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Customer_ID` int(11) NOT NULL,
+  `Company_ID` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `Sector` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `Product_Type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `Company_Name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Working_From` date NOT NULL,
   `Working_Till` date NOT NULL,
   PRIMARY KEY (`Customer_ID`),
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-28 12:13:59
+-- Dump completed on 2020-05-01 16:26:59
